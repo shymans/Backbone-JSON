@@ -34,6 +34,24 @@
             return this;
           }
         });
+
+        var userList = new UserList;
+
+        //App View
+        var AppView = Backbone.View.extend({
+          el:body,
+          render: function(){
+            var usersView = new UsersView({model.userList})
+            var usersViewRender = usersView.render().el;
+            $('.users').html(usersViewRender);
+          },
+          initialize: function(){
+            var Options = ();
+            Options.success = this.render;
+            userList.fetch(Options);
+          }
+        });
+        var App = new AppView;
       })
     </script>
   </body>
