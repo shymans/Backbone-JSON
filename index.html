@@ -4,7 +4,7 @@
     <title>Backbone App</title>
   </head>
   <body>
-    <div id="user_container"></div>
+    <ul class="users"></ul>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
@@ -13,7 +13,28 @@
     
 
     <script>
-      
+      $(function(){
+        var User = Backbone.Model.extend();
+        var UserList = Backbone.Collection.extend({
+          model: User,
+          url: 'users.json'
+        });
+        //Users View
+        var UsersView = Backbone.View.extend({
+          template: _.template($('userlist_template').html()),
+          render: function(ev){
+            _.each(this.model.models, function(user){
+              var username = user.attributes['username'];
+              var email = user.attributes['email'];
+              //Assign template
+              var template = this.template(user.JSON());
+
+              $(this.el).append(template);
+            }, this);
+            return this;
+          }
+        });
+      })
     </script>
   </body>
 </html>
