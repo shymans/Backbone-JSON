@@ -9,9 +9,12 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
-    
-    
-
+    <script type="text/template" id="userlist_template">    
+      <li>
+        Username: <%= username %><br>
+        Email: <%= email %>
+      </li>
+    </script>
     <script>
       $(function(){
         var User = Backbone.Model.extend();
@@ -21,13 +24,13 @@
         });
         //Users View
         var UsersView = Backbone.View.extend({
-          template: _.template($('userlist_template').html()),
+          template: _.template($('#userlist_template').html()),
           render: function(ev){
             _.each(this.model.models, function(user){
               var username = user.attributes['username'];
               var email = user.attributes['email'];
               //Assign template
-              var template = this.template(user.JSON());
+              var template = this.template(user.toJSON());
 
               $(this.el).append(template);
             }, this);
@@ -39,14 +42,14 @@
 
         //App View
         var AppView = Backbone.View.extend({
-          el:body,
+          el:"body",
           render: function(){
-            var usersView = new UsersView({model.userList})
+            var usersView = new UsersView({model:userList})
             var usersViewRender = usersView.render().el;
             $('.users').html(usersViewRender);
           },
           initialize: function(){
-            var Options = ();
+            var Options = {};
             Options.success = this.render;
             userList.fetch(Options);
           }
