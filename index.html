@@ -2,8 +2,13 @@
 <html>
   <head>
     <title>Backbone App</title>
+    <style>
+      li{list-style:none; border-bottom:1px #ccc dotted; padding:10px 0 10px 0}
+      h3{padding: 8px; background:#f4f4f4;}
+    </style>
   </head>
   <body>
+    <h3>User List></h3>
     <ul class="users"></ul>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11,8 +16,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
     <script type="text/template" id="userlist_template">    
       <li>
-        Username: <%= username %><br>
-        Email: <%= email %>
+        <strong>Username:</strong> <%= username %><br>
+        <strong>Email:</strong> <%= email %>
       </li>
     </script>
     <script>
